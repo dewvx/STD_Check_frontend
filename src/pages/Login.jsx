@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Lock, User, LogIn, GraduationCap, AlertCircle } from "lucide-react";
 import { Link } from "react-router-dom";
+import { API_URL } from "./Subject";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -75,7 +76,7 @@ export default function Login() {
       }
 
       // ลองเข้าสู่ระบบในฐานะนักเรียน
-      const studentRes = await fetch(`http://localhost:5000/login?type=1`, {
+      const studentRes = await fetch(`${API_URL}/login?type=1`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
@@ -91,7 +92,7 @@ export default function Login() {
       }
 
       // ลองเข้าสู่ระบบในฐานะอาจารย์
-      const professorRes = await fetch(`http://localhost:5000/login?type=2`, {
+      const professorRes = await fetch(`${API_URL}/login?type=2`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
