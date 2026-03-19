@@ -123,14 +123,16 @@ function Register() {
       let res;
       if (role === "student") {
         res = await axios.post(`${API_URL}/create-std`, {
-          fullName: formData.fullName,
-          studentId: formData.studentId,
+          fullname: formData.fullName,       // แก้ให้ตัวเล็กหมดตามฐานข้อมูล
+          std_class_id: formData.studentId,  // ส่งเข้าคอลัมน์ std_class_id แทน
           username: formData.username,
           password: formData.password,
+          profile: "default_profile.png",    // ส่งค่าเริ่มต้นเข้าไปให้ profile เพราะห้ามเป็นค่าว่าง
+          major: "-"                         // ส่งเผื่อไปให้เผื่อระบบต้องการ
         });
       } else {
         res = await axios.post(`${API_URL}/create-professor`, {
-          fullname: formData.fullName,
+          fullname: formData.fullName,       // ของอาจารย์ก็แก้เป็น fullname
           tel: formData.tel,
           username: formData.username,
           password: formData.password,
@@ -153,7 +155,7 @@ function Register() {
         });
         // Redirect หลัง 2 วินาที
         setTimeout(() => {
-          location.href = "/";
+          window.location.href = "/"; // แก้ไขจาก location.href เป็น window.location.href
         }, 2000);
       }
     } catch (error) {
